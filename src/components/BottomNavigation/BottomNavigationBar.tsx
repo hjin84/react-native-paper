@@ -139,7 +139,7 @@ export type Props<Route extends BaseRoute> = {
    * Callback which returns a React element to be used as the touchable for the tab item.
    * Renders a `TouchableRipple` on Android and `Pressable` on iOS.
    */
-  renderTouchable = ({ key, ...props }: TouchableProps<Route>) => <Touchable key={key} {...props} />,
+  renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
@@ -360,7 +360,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   navigationState,
   renderIcon,
   renderLabel,
-  renderTouchable = (props: TouchableProps<Route>) => <Touchable {...props} />,
+  renderTouchable = ({ key, ...props }: TouchableProps<Route>) => <Touchable key={key} {...props} />,
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
   getColor = ({ route }: { route: Route }) => route.color,
